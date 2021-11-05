@@ -4,7 +4,7 @@ metadata:
   name: {{ .Release.Name }}
   namespace: {{ .Values.ratings.namespace }}
 spec:
-  type: {{ .Values.ingress.type }}
+  type: {{ .Values.ingress.serviceType }}
   ports:
   - port: {{ .Values.ratings.port }}
   selector:
