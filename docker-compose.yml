@@ -1,16 +1,16 @@
 services:
   ratings:
-    build: .
-    image: ghcr.io/dungpornbt/bookinfo-ratings:dev
+    build: . 
+    image: {{ .Values.ratings.image }}:{{ .Values.ratings.tag }}
     ports:
       - "8080:8080"
     environment:
-      SERVICE_VERSION: v2
-      MONGO_DB_URL: mongodb://mongodb:27017/ratings
-      MONGO_DB_USERNAME: ratings
-      MONGO_DB_PASSWORD: CHANGEME
-  mongodb:
-    image: bitnami/mongodb:5.0.2-debian-10-r2
+      SERVICE_VERSION: {{ .Values.extraEnv.SERVICE_VERSION }}
+      MONGO_DB_URL: {{ .Values.extraEnv.MONGO_DB_URL }}
+      MONGO_DB_USERNAME: {{ .Values.extraEnv.MONGO_DB_USERNAME }}
+      MONGO_DB_PASSWORD: {{ .Values.extraEnv.MONGODB_PASSWORD }}        
+mongodb:
+    image: bitnami/5.0.3-debian-10-r30
     volumes:
       - "./databases:/docker-entrypoint-initdb.d"
     environment:
