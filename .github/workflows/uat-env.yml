@@ -49,5 +49,5 @@ jobs:
     needs: deploy
     runs-on: ubuntu-20.04
     steps:
-      - name: Test acceptance code
-        run: curl http://sitkmutt.bookinfo.dev.opsta.net/student11/ratings/health | grep "Ratings is good"
+      - name: Run acceptance code
+        run: curl http://sitkmutt.bookinfo.uat.opsta.net/student11/ratings/health | grep "Ratings is good"

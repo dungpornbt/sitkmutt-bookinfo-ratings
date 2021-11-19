@@ -45,3 +45,9 @@ jobs:
                 "COMMIT_SHA": "${{ github.sha }}"
               }
             }
+  test:
+    needs: deploy
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Run acceptance code
+        run: curl http://sitkmutt.bookinfo.dev.opsta.net/student11/ratings/health | grep "Ratings is good"
