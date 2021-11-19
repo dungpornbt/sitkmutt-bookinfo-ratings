@@ -1,0 +1,20 @@
+services:
+  ratings:
+    build: . 
+    image: {{ .Values.ratings.image }}:{{ .Values.ratings.tag }}
+    ports:
+      - "8080:8080"
+    environment:
+      SERVICE_VERSION: {{ .Values.extraEnv.SERVICE_VERSION }}
+      MONGO_DB_URL: {{ .Values.extraEnv.MONGO_DB_URL }}
+      MONGO_DB_USERNAME: {{ .Values.extraEnv.MONGO_DB_USERNAME }}
+      MONGO_DB_PASSWORD: {{ .Values.extraEnv.MONGODB_PASSWORD }}        
+mongodb:
+    image: bitnami/5.0.3-debian-10-r30
+    volumes:
+      - "./databases:/docker-entrypoint-initdb.d"
+    environment:
+      MONGODB_ROOT_PASSWORD: CHANGEME
+      MONGODB_USERNAME: ratings
+      MONGODB_PASSWORD: CHANGEME
+      MONGODB_DATABASE: ratings
